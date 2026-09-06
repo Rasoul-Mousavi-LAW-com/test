@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>در دست تعمیر - صفحه در حال به‌روزرسانی است</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --accent: #f59e0b;
+            --bg-start: #0f172a;
+            --bg-end: #1e293b;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 50%, #0f172a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            direction: rtl;
+        }
+
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 60px 60px;
+            }
+        }
+
+        /* Glowing orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(59, 130, 246, 0.25);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: rgba(245, 158, 11, 0.2);
+            bottom: -80px;
+            right: -80px;
+            animation-delay: -4s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(139, 92, 246, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -8s;
+        }
+
+        @keyframes orbFloat {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(30px, -40px) scale(1.05);
+            }
+            50% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+            75% {
+                transform: translate(15px, 30px) scale(1.02);
+            }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: particleFloat 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            top: 15%;
+            left: 20%;
+            animation-delay: 0s;
+            width: 3px;
+            height: 3px;
+        }
+        .particle:nth-child(2) {
+            top: 70%;
+            left: 80%;
+            animation-delay: -2s;
+            width: 5px;
+            height: 5px;
+        }
+        .particle:nth-child(3) {
+            top: 30%;
+            left: 60%;
+            animation-delay: -4s;
+            width: 2px;
+            height: 2px;
+        }
+        .particle:nth-child(4) {
+            top: 80%;
+            left: 15%;
+            animation-delay: -6s;
+            width: 4px;
+            height: 4px;
+        }
+        .particle:nth-child(5) {
+            top: 50%;
+            left: 40%;
+            animation-delay: -3s;
+            width: 3px;
+            height: 3px;
+        }
+        .particle:nth-child(6) {
+            top: 10%;
+            left: 75%;
+            animation-delay: -5s;
+            width: 5px;
+            height: 5px;
+        }
+        .particle:nth-child(7) {
+            top: 60%;
+            left: 5%;
+            animation-delay: -7s;
+            width: 2px;
+            height: 2px;
+        }
+        .particle:nth-child(8) {
+            top: 40%;
+            left: 90%;
+            animation-delay: -1s;
+            width: 4px;
+            height: 4px;
+        }
+
+        @keyframes particleFloat {
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-30px) translateX(15px);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-10px) translateX(-10px);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translateY(-40px) translateX(5px);
+                opacity: 0.7;
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        /* Card */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+                0 0 80px rgba(59, 130, 246, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow:
+                0 30px 70px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+                0 0 100px rgba(59, 130, 246, 0.12);
+            transform: translateY(-2px);
+        }
+
+        /* Icon wrapper */
+        .icon-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 3px dashed var(--accent);
+            animation: spin 20s linear infinite;
+            opacity: 0.7;
+        }
+
+        .icon-ring-2 {
+            position: absolute;
+            inset: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            animation: spin-reverse 15s linear infinite;
+            opacity: 0.5;
+        }
+
+        .icon-ring-3 {
+            position: absolute;
+            inset: 24px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            animation: spin 10s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin-reverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        .icon-center {
+            position: relative;
+            z-index: 2;
+            font-size: 3rem;
+            animation: bounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.5));
+        }
+
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Title */
+        .title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        .title .highlight {
+            background: linear-gradient(135deg, var(--accent) 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+
+        /* Divider */
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 1.5rem auto;
+            border-radius: 10px;
+            animation: dividerPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dividerPulse {
+            0%,
+            100% {
+                width: 80px;
+                opacity: 1;
+            }
+            50% {
+                width: 120px;
+                opacity: 0.7;
+            }
+        }
+
+        /* Description */
+        .description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 2;
+            margin-bottom: 2rem;
+        }
+
+        /* Progress bar */
+        .progress-wrapper {
+            margin: 1.5rem 0 2rem 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent), #f97316);
+            border-radius: 50px;
+            width: 0%;
+            animation: progressFill 3s ease-in-out forwards, progressShimmer 2s linear infinite;
+            background-size: 200% 100%;
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    transparent 100%);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes progressFill {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 75%;
+            }
+        }
+
+        @keyframes progressShimmer {
+            0% {
+                background-position: 0% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Contact info */
+        .contact-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .contact-info .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(1.5);
+            }
+        }
+
+        .email-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 1px dashed var(--accent);
+            padding-bottom: 2px;
+        }
+
+        .email-link:hover {
+            color: #fbbf24;
+            border-bottom-color: #fbbf24;
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Status indicator */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .card {
+                padding: 2rem 1.5rem;
+                border-radius: 18px;
+            }
+
+            .title {
+                font-size: 1.7rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .description {
+                font-size: 0.85rem;
+            }
+
+            .icon-wrapper {
+                width: 90px;
+                height: 90px;
+            }
+
+            .icon-center {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .title {
+                font-size: 1.4rem;
+            }
+
+            .card {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background grid -->
+    <div class="bg-grid"></div>
+
+    <!-- Glowing orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Floating particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+        <div class="card">
+            <!-- Status indicator -->
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span>در حال به‌روزرسانی</span>
+            </div>
+
+            <!-- Animated icon -->
+            <div class="icon-wrapper">
+                <div class="icon-ring"></div>
+                <div class="icon-ring-2"></div>
+                <div class="icon-ring-3"></div>
+                <div class="icon-center">🔧</div>
+            </div>
+
+            <!-- Title -->
+            <h1 class="title">
+                این صفحه در <span class="highlight">دست تعمیر</span> است
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="subtitle">
+                در حال ارتقا و بهبود خدمات هستیم
+            </p>
+
+            <!-- Divider -->
+            <div class="divider"></div>
+
+            <!-- Description -->
+            <p class="description">
+                ما در حال انجام تغییرات و به‌روزرسانی‌های لازم برای ارائه تجربه‌ای بهتر هستیم.
+                <br>
+                لطفاً کمی بعد دوباره سر بزنید. از صبر و شکیبایی شما سپاسگزاریم.
+            </p>
+
+            <!-- Progress bar -->
+            <div class="progress-wrapper">
+                <div class="progress-label">
+                    <span>پیشرفت تعمیرات</span>
+                    <span>۷۵٪</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <!-- Contact info -->
+            <div class="contact-info">
+                <span class="dot"></span>
+                <span>در صورت نیاز فوری، با ما در تماس باشید:</span>
+                <a href="mailto:support@example.com" class="email-link">support@example.com</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
