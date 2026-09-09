@@ -3,629 +3,2634 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>در دست تعمیر - صفحه در حال به‌روزرسانی است</title>
-    <style>
-        :root {
-            --primary: #3b82f6;
-            --primary-dark: #1d4ed8;
-            --accent: #f59e0b;
-            --bg-start: #0f172a;
-            --bg-end: #1e293b;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.1);
-        }
+    <meta name="description" content="موسسه حقوقی دادفران فرتاک - مدیریت وکیل پایه یک دادگستری محسن یونسی | خدمات حقوقی فراملیتی">
+    <meta name="keywords" content="موسسه حقوقی, وکیل, دادفران فرتاک, محسن یونسی, بلاکچین, رمز ارز, حقوق شرکت ها">
+    <title>موسسه حقوقی دادفران فرتاک | Dadfarān Fartāk Law Firm</title>
 
-        * {
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ============ RESET & BASE ============ */
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --burnt-brown: #3E2723;
+            --burnt-brown-light: #5D4037;
+            --burnt-brown-dark: #2B1A17;
+            --gold: #D4AF37;
+            --gold-light: #E8C968;
+            --gold-dark: #B8941F;
+            --black: #0A0A0A;
+            --black-soft: #1A1A1A;
+            --cream: #F5E6D3;
+            --cream-light: #FAF3E7;
+            --cream-dark: #E8D5B7;
+            --shadow-gold: 0 10px 40px rgba(212, 175, 55, 0.2);
+            --shadow-dark: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
         body {
-            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 50%, #0f172a 100%);
-            min-height: 100vh;
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--cream-light);
+            color: var(--burnt-brown-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body.en {
+            font-family: 'Cormorant Garamond', 'Vazirmatn', serif;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ============ PRELOADER ============ */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 99999;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+            text-align: center;
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preloader-bar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: var(--gold);
+            animation: loadBar 1.5s ease forwards;
+        }
+
+        @keyframes loadBar {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-img {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+            transition: var(--transition);
+        }
+
+        .logo-img:hover {
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .name {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .logo-text .tagline {
+            color: var(--cream);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--cream);
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gold);
+            border-radius: 30px;
+            color: var(--gold);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .lang-switch:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .btn-consult {
+            padding: 0.7rem 1.8rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-consult:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ============ NEWS TICKER ============ */
+        .news-ticker {
+            background: linear-gradient(90deg, var(--burnt-brown-dark), var(--burnt-brown));
+            color: var(--cream);
+            padding: 0.7rem 0;
+            margin-top: 82px;
+            border-bottom: 1px solid var(--gold);
             overflow: hidden;
             position: relative;
-            direction: rtl;
         }
 
-        /* Animated background grid */
-        .bg-grid {
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: 0;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 60px 60px;
-            }
-        }
-
-        /* Glowing orbs */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            pointer-events: none;
-            animation: orbFloat 12s ease-in-out infinite;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(59, 130, 246, 0.25);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 350px;
-            height: 350px;
-            background: rgba(245, 158, 11, 0.2);
-            bottom: -80px;
-            right: -80px;
-            animation-delay: -4s;
-        }
-
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: rgba(139, 92, 246, 0.2);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: -8s;
-        }
-
-        @keyframes orbFloat {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(30px, -40px) scale(1.05);
-            }
-            50% {
-                transform: translate(-20px, 20px) scale(0.95);
-            }
-            75% {
-                transform: translate(15px, 30px) scale(1.02);
-            }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .particle {
+        .ticker-label {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: particleFloat 8s ease-in-out infinite;
-        }
-
-        .particle:nth-child(1) {
-            top: 15%;
-            left: 20%;
-            animation-delay: 0s;
-            width: 3px;
-            height: 3px;
-        }
-        .particle:nth-child(2) {
-            top: 70%;
-            left: 80%;
-            animation-delay: -2s;
-            width: 5px;
-            height: 5px;
-        }
-        .particle:nth-child(3) {
-            top: 30%;
-            left: 60%;
-            animation-delay: -4s;
-            width: 2px;
-            height: 2px;
-        }
-        .particle:nth-child(4) {
-            top: 80%;
-            left: 15%;
-            animation-delay: -6s;
-            width: 4px;
-            height: 4px;
-        }
-        .particle:nth-child(5) {
-            top: 50%;
-            left: 40%;
-            animation-delay: -3s;
-            width: 3px;
-            height: 3px;
-        }
-        .particle:nth-child(6) {
-            top: 10%;
-            left: 75%;
-            animation-delay: -5s;
-            width: 5px;
-            height: 5px;
-        }
-        .particle:nth-child(7) {
-            top: 60%;
-            left: 5%;
-            animation-delay: -7s;
-            width: 2px;
-            height: 2px;
-        }
-        .particle:nth-child(8) {
-            top: 40%;
-            left: 90%;
-            animation-delay: -1s;
-            width: 4px;
-            height: 4px;
-        }
-
-        @keyframes particleFloat {
-            0%,
-            100% {
-                transform: translateY(0) translateX(0);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translateY(-30px) translateX(15px);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translateY(-10px) translateX(-10px);
-                opacity: 0.5;
-            }
-            75% {
-                transform: translateY(-40px) translateX(5px);
-                opacity: 0.7;
-            }
-        }
-
-        /* Main container */
-        .container {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-        }
-
-        /* Card */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 3rem 2.5rem;
-            box-shadow:
-                0 25px 60px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.05) inset,
-                0 0 80px rgba(59, 130, 246, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow:
-                0 30px 70px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-                0 0 100px rgba(59, 130, 246, 0.12);
-            transform: translateY(-2px);
-        }
-
-        /* Icon wrapper */
-        .icon-wrapper {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem auto;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: var(--gold);
+            color: var(--black);
+            padding: 0 1.5rem;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            z-index: 2;
+            font-size: 0.9rem;
         }
 
-        .icon-ring {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 3px dashed var(--accent);
-            animation: spin 20s linear infinite;
-            opacity: 0.7;
+        .ticker-content {
+            display: flex;
+            gap: 4rem;
+            padding-right: 180px;
+            animation: tickerScroll 40s linear infinite;
+            white-space: nowrap;
         }
 
-        .icon-ring-2 {
-            position: absolute;
-            inset: 12px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            animation: spin-reverse 15s linear infinite;
-            opacity: 0.5;
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.9rem;
         }
 
-        .icon-ring-3 {
-            position: absolute;
-            inset: 24px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
-            animation: spin 10s linear infinite;
-            opacity: 0.4;
+        .ticker-item::before {
+            content: '◆';
+            color: var(--gold);
         }
 
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(0);
             }
-            to {
-                transform: rotate(360deg);
+            100% {
+                transform: translateX(-50%);
             }
         }
 
-        @keyframes spin-reverse {
-            from {
-                transform: rotate(360deg);
-            }
-            to {
-                transform: rotate(0deg);
-            }
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            background: url('https://raw.githubusercontent.com/yonesi-lawyer-com/home-page/refs/heads/main/pmsTRsVX8PxtvjU4LIlmrirbrE4-K3W-VHGETKyDF6kLUBHy2Q.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            color: var(--cream);
         }
 
-        .icon-center {
+        .hero-content {
             position: relative;
             z-index: 2;
-            font-size: 3rem;
-            animation: bounce 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.5));
+            max-width: 850px;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 24px;
+            padding: 3.5rem 4rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.6rem 1.5rem;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold);
+            border-radius: 30px;
+            color: var(--gold);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.5s forwards;
+        }
+
+        .hero-title .gold {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--cream);
+            margin-bottom: 2.5rem;
+            max-width: 100%;
+            opacity: 0;
+            animation: fadeInUp 1s 0.7s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s 0.9s forwards;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-outline {
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            animation: fadeInUp 1s 1.1s forwards;
+        }
+
+        .stat-item .number {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .stat-item .label {
+            color: var(--cream-dark);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-align: center;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
             0%,
             100% {
-                transform: translateY(0);
+                transform: translateX(-50%) translateY(0);
             }
             50% {
-                transform: translateY(-10px);
+                transform: translateX(-50%) translateY(10px);
             }
         }
 
-        /* Title */
-        .title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-            letter-spacing: -0.5px;
+        /* ============ SECTIONS COMMON ============ */
+        section {
+            padding: 6rem 0;
+            position: relative;
         }
 
-        .title .highlight {
-            background: linear-gradient(135deg, var(--accent) 0%, #f97316 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
-        /* Subtitle */
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            line-height: 1.8;
+        .section-tag {
+            display: inline-block;
+            color: var(--gold-dark);
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
-        /* Divider */
-        .divider {
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--burnt-brown-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title .gold {
+            color: var(--gold-dark);
+        }
+
+        .section-divider {
             width: 80px;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
             margin: 1.5rem auto;
-            border-radius: 10px;
-            animation: dividerPulse 2s ease-in-out infinite;
+            position: relative;
         }
 
-        @keyframes dividerPulse {
-            0%,
-            100% {
-                width: 80px;
-                opacity: 1;
-            }
-            50% {
-                width: 120px;
-                opacity: 0.7;
-            }
-        }
-
-        /* Description */
-        .description {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 2;
-            margin-bottom: 2rem;
-        }
-
-        /* Progress bar */
-        .progress-wrapper {
-            margin: 1.5rem 0 2rem 0;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-bar-bg {
-            width: 100%;
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 8px;
             height: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .section-divider::before {
+            right: -20px;
+        }
+        .section-divider::after {
+            left: -20px;
+        }
+
+        .section-desc {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--burnt-brown-light);
+            font-size: 1.05rem;
+        }
+
+        /* ============ ABOUT ============ */
+        .about {
+            background: var(--cream-light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
             overflow: hidden;
-            position: relative;
+            box-shadow: var(--shadow-dark);
         }
 
-        .progress-bar-fill {
+        .about-image-inner {
+            aspect-ratio: 4/5;
+            background: var(--burnt-brown);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-img {
+            width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent), #f97316);
-            border-radius: 50px;
-            width: 0%;
-            animation: progressFill 3s ease-in-out forwards, progressShimmer 2s linear infinite;
-            background-size: 200% 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .about-image:hover .about-img {
+            transform: scale(1.05);
+        }
+
+        .about-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--burnt-brown-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .about-content p {
+            color: var(--burnt-brown-light);
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 10px;
+            border-right: 3px solid var(--gold);
+            transition: var(--transition);
+        }
+
+        .about-feature:hover {
+            transform: translateX(-5px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .about-feature i {
+            color: var(--gold-dark);
+            font-size: 1.3rem;
+        }
+
+        .about-feature span {
+            font-weight: 600;
+            color: var(--burnt-brown-dark);
+            font-size: 0.95rem;
+        }
+
+        /* ============ DEPARTMENTS ============ */
+        .departments {
+            background: linear-gradient(180deg, var(--cream-light), var(--cream));
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dept-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            cursor: pointer;
+        }
+
+        .dept-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .dept-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--gold);
+        }
+
+        .dept-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .dept-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--burnt-brown), var(--burnt-brown-dark));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
             position: relative;
         }
 
-        .progress-bar-fill::after {
+        .dept-icon::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .dept-card:hover .dept-icon {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            transform: rotate(-5deg) scale(1.05);
+        }
+
+        .dept-card:hover .dept-icon::after {
+            opacity: 0.5;
+        }
+
+        .dept-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--burnt-brown-dark);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .dept-card p {
+            color: var(--burnt-brown-light);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .dept-link {
+            color: var(--gold-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .dept-link:hover {
+            gap: 1rem;
+            color: var(--burnt-brown-dark);
+        }
+
+        /* ============ MANAGER ============ */
+        .manager {
+            background: linear-gradient(135deg, var(--burnt-brown-dark), var(--black));
+            color: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manager::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(90deg,
-                    transparent 0%,
-                    rgba(255, 255, 255, 0.3) 50%,
-                    transparent 100%);
-            animation: shimmer 1.5s infinite;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1), transparent 40%),
+                radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.08), transparent 40%);
         }
 
-        @keyframes progressFill {
-            from {
-                width: 0%;
-            }
-            to {
-                width: 75%;
-            }
+        .manager-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes progressShimmer {
-            0% {
-                background-position: 0% 0;
-            }
-            100% {
-                background-position: 200% 0;
-            }
+        .manager-photo {
+            position: relative;
+            aspect-ratio: 3/4;
+            max-width: 400px;
+            margin: 0 auto;
         }
 
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
+        .manager-photo-frame {
+            position: absolute;
+            inset: 0;
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            transform: translate(20px, 20px);
         }
 
-        /* Contact info */
-        .contact-info {
+        .manager-photo-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--burnt-brown), var(--burnt-brown-light));
+            border-radius: 20px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+        }
+
+        .manager-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .manager-info .section-tag {
+            color: var(--gold);
+        }
+
+        .manager-info .section-title {
+            color: var(--cream);
+            text-align: right;
+        }
+
+        .manager-info .section-title .gold {
+            color: var(--gold);
+        }
+
+        .manager-info .section-divider {
+            margin: 1.5rem 0 1.5rem auto;
+        }
+
+        .manager-name {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .manager-title {
+            color: var(--cream-dark);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .manager-bio {
+            color: var(--cream-dark);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .manager-credentials {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .credential {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .credential:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold);
+        }
+
+        .credential i {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .credential span {
             font-size: 0.9rem;
-            color: var(--text-muted);
-            flex-wrap: wrap;
+            color: var(--cream);
+            font-weight: 500;
         }
 
-        .contact-info .dot {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
+        .manager-signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        /* ============ WHY US ============ */
+        .why-us {
+            background: var(--cream-light);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 20px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .why-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .why-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             border-radius: 50%;
-            animation: dotPulse 1.5s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-size: 2.2rem;
+            position: relative;
+            transition: var(--transition);
         }
 
-        @keyframes dotPulse {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.3;
-                transform: scale(1.5);
+        .why-icon::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border: 2px dashed var(--gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
             }
         }
 
-        .email-link {
-            color: var(--accent);
-            text-decoration: none;
+        .why-card:hover .why-icon {
+            transform: scale(1.1);
+        }
+
+        .why-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--burnt-brown-dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .why-card p {
+            color: var(--burnt-brown-light);
+            font-size: 0.95rem;
+        }
+
+        /* ============ COUNTER ============ */
+        .counter-section {
+            background: linear-gradient(135deg, var(--burnt-brown-dark), var(--black));
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .counter-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 10% 50%, rgba(212, 175, 55, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 50%, rgba(212, 175, 55, 0.1), transparent 40%);
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .counter-item {
+            text-align: center;
+            color: var(--cream);
+        }
+
+        .counter-item i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .counter-num {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .counter-label {
+            color: var(--cream-dark);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* ============ CONTACT ============ */
+        .contact {
+            background: linear-gradient(135deg, var(--cream-light), var(--cream));
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, var(--burnt-brown-dark), var(--black));
+            color: var(--cream);
+            padding: 3rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 40%);
+        }
+
+        .contact-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .contact-info>p {
+            color: var(--cream-dark);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .contact-list {
+            list-style: none;
+            position: relative;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .contact-list li:last-child {
+            border-bottom: none;
+        }
+
+        .contact-list i {
+            width: 45px;
+            height: 45px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .contact-list .label {
+            color: var(--gold);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border-bottom: 1px dashed var(--accent);
-            padding-bottom: 2px;
         }
 
-        .email-link:hover {
-            color: #fbbf24;
-            border-bottom-color: #fbbf24;
-            text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        .contact-list .value {
+            color: var(--cream);
+            font-size: 1rem;
+            direction: ltr;
+            text-align: right;
         }
 
-        /* Status indicator */
-        .status-indicator {
+        .contact-list .value.rtl-text {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(62, 39, 35, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--burnt-brown-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid var(--cream-dark);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--burnt-brown-dark);
+            background: var(--cream-light);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 50px;
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            font-size: 0.8rem;
-            color: var(--accent);
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--black);
+            color: var(--cream);
+            padding: 4rem 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 0.8rem;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .footer-about p {
+            color: var(--cream-dark);
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-links a {
+            color: var(--cream-dark);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-right: 5px;
+        }
+
+        .footer-links a::before {
+            content: '›';
+            color: var(--gold);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            color: var(--cream-dark);
+            font-size: 0.9rem;
+        }
+
+        .footer-contact i {
+            color: var(--gold);
+            margin-top: 0.3rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 1rem;
+            background: var(--black-soft);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            background: transparent;
+            border: none;
+            color: var(--cream);
+            font-family: inherit;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 0 1.5rem;
+            background: var(--gold);
+            color: var(--black);
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--gold-light);
+        }
+
+        .footer-bottom {
+            padding: 2rem 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            text-align: center;
+            color: var(--cream-dark);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom .gold {
+            color: var(--gold);
+        }
+
+        /* ============ SCROLL ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ============ BACK TO TOP ============ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
             border-radius: 50%;
-            animation: dotPulse 1.5s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-gold);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 999;
         }
 
-        /* Responsive */
-        @media (max-width: 480px) {
-            .card {
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .about-grid,
+            .manager-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .hero-content {
+                padding: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 350px;
+                height: 100vh;
+                background: var(--black);
+                flex-direction: column;
+                padding: 6rem 2rem 2rem;
+                transition: right 0.4s ease;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .btn-consult {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 100px;
+                background-attachment: scroll;
+            }
+
+            .hero-content {
                 padding: 2rem 1.5rem;
-                border-radius: 18px;
+                margin: 0 1rem;
             }
 
-            .title {
-                font-size: 1.7rem;
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
             }
 
-            .subtitle {
-                font-size: 1rem;
+            .stat-item {
+                flex: 1;
+                min-width: 120px;
             }
 
-            .description {
-                font-size: 0.85rem;
+            .about-features,
+            .manager-credentials,
+            .form-row {
+                grid-template-columns: 1fr;
             }
 
-            .icon-wrapper {
-                width: 90px;
-                height: 90px;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
-            .icon-center {
-                font-size: 2.2rem;
+            section {
+                padding: 4rem 0;
+            }
+
+            .ticker-label {
+                padding: 0 1rem;
+                font-size: 0.8rem;
+            }
+
+            .ticker-content {
+                padding-right: 140px;
             }
         }
 
-        @media (max-width: 360px) {
-            .title {
-                font-size: 1.4rem;
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
             }
 
-            .card {
-                padding: 1.5rem 1rem;
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-outline {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .logo-text .name {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .logo-text .tagline {
+                font-size: 0.6rem;
+            }
+
+            .logo-img {
+                height: 55px;
+            }
+        }
+
+        /* ============ PRINT ============ */
+        @media print {
+            .header,
+            .news-ticker,
+            .back-to-top,
+            .preloader {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background grid -->
-    <div class="bg-grid"></div>
-
-    <!-- Glowing orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
-    <!-- Floating particles -->
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">DADFARAN FARTAK</div>
+        <div class="preloader-bar"></div>
     </div>
 
-    <!-- Main content -->
-    <div class="container">
-        <div class="card">
-            <!-- Status indicator -->
-            <div class="status-indicator">
-                <span class="status-dot"></span>
-                <span>در حال به‌روزرسانی</span>
-            </div>
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="#home" class="logo">
+                    <img src="https://raw.githubusercontent.com/yonesi-lawyer-com/home-page/refs/heads/main/70a562c3-f2e1-4875-b000-259928091981.png" alt="Dadfarān Fartāk Law Firm Logo" class="logo-img">
+                    <div class="logo-text">
+                        <span class="name">DADFARAN FARTAK</span>
+                        <span class="tagline" data-i18n="tagline">موسسه حقوقی دادفران فرتاک</span>
+                    </div>
+                </a>
 
-            <!-- Animated icon -->
-            <div class="icon-wrapper">
-                <div class="icon-ring"></div>
-                <div class="icon-ring-2"></div>
-                <div class="icon-ring-3"></div>
-                <div class="icon-center">🔧</div>
-            </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" data-i18n="nav.home">خانه</a></li>
+                    <li><a href="#about" data-i18n="nav.about">درباره ما</a></li>
+                    <li><a href="#departments" data-i18n="nav.departments">دپارتمان‌ها</a></li>
+                    <li><a href="#manager" data-i18n="nav.manager">مدیریت</a></li>
+                    <li><a href="#why" data-i18n="nav.why">چرا ما</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">تماس</a></li>
+                </ul>
 
-            <!-- Title -->
-            <h1 class="title">
-                این صفحه در <span class="highlight">دست تعمیر</span> است
-            </h1>
-
-            <!-- Subtitle -->
-            <p class="subtitle">
-                در حال ارتقا و بهبود خدمات هستیم
-            </p>
-
-            <!-- Divider -->
-            <div class="divider"></div>
-
-            <!-- Description -->
-            <p class="description">
-                ما در حال انجام تغییرات و به‌روزرسانی‌های لازم برای ارائه تجربه‌ای بهتر هستیم.
-                <br>
-                لطفاً کمی بعد دوباره سر بزنید. از صبر و شکیبایی شما سپاسگزاریم.
-            </p>
-
-            <!-- Progress bar -->
-            <div class="progress-wrapper">
-                <div class="progress-label">
-                    <span>پیشرفت تعمیرات</span>
-                    <span>۷۵٪</span>
+                <div class="nav-actions">
+                    <button class="lang-switch" id="langSwitch">
+                        <i class="fas fa-globe"></i>
+                        <span id="langText">EN</span>
+                    </button>
+                    <a href="#contact" class="btn-consult" data-i18n="nav.consult">مشاوره حقوقی</a>
+                    <div class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill"></div>
-                </div>
-            </div>
+            </nav>
+        </div>
+    </header>
 
-            <!-- Contact info -->
-            <div class="contact-info">
-                <span class="dot"></span>
-                <span>در صورت نیاز فوری، با ما در تماس باشید:</span>
-                <a href="mailto:support@example.com" class="email-link">support@example.com</a>
-            </div>
+    <!-- NEWS TICKER -->
+    <div class="news-ticker">
+        <div class="ticker-label">
+            <i class="fas fa-bullhorn"></i>
+            <span data-i18n="ticker.label">اخبار حقوقی</span>
+        </div>
+        <div class="ticker-content" id="tickerContent">
+            <span class="ticker-item" data-i18n="ticker.1">بررسی قانون جدید آیین دادرسی کیفری در مجلس شورای اسلامی</span>
+            <span class="ticker-item" data-i18n="ticker.2">برگزاری سمینار بین‌المللی حقوق بلاکچین در تهران</span>
+            <span class="ticker-item" data-i18n="ticker.3">موسسه دادفران فرتاک آماده ارائه خدمات حقوقی فراملیتی</span>
+            <span class="ticker-item" data-i18n="ticker.4">آغاز ثبت‌نام دوره تخصصی داوری تجاری بین‌المللی</span>
+            <span class="ticker-item" data-i18n="ticker.5">همکاری جدید با موسسات حقوقی اروپا و آسیا</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="ticker-item" data-i18n="ticker.1">بررسی قانون جدید آیین دادرسی کیفری در مجلس شورای اسلامی</span>
+            <span class="ticker-item" data-i18n="ticker.2">برگزاری سمینار بین‌المللی حقوق بلاکچین در تهران</span>
+            <span class="ticker-item" data-i18n="ticker.3">موسسه دادفران فرتاک آماده ارائه خدمات حقوقی فراملیتی</span>
+            <span class="ticker-item" data-i18n="ticker.4">آغاز ثبت‌نام دوره تخصصی داوری تجاری بین‌المللی</span>
+            <span class="ticker-item" data-i18n="ticker.5">همکاری جدید با موسسات حقوقی اروپا و آسیا</span>
         </div>
     </div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="container" style="display: flex; justify-content: center; width: 100%;">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    <span data-i18n="hero.badge">موسسه حقوقی فراملیتی با چندین سال سابقه درخشان</span>
+                </div>
+                <h1 class="hero-title">
+                    <span data-i18n="hero.title1">عدالت،</span>
+                    <span class="gold" data-i18n="hero.title2">اعتماد،</span>
+                    <span data-i18n="hero.title3">تعالی</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
+                    موسسه حقوقی دادفران فرتاک با مدیریت وکیل پایه یک دادگستری، محسن یونسی، ارائه‌دهنده خدمات حقوقی تخصصی در حوزه‌های نوین بلاکچین، رمزارز، حقوق بین‌الملل و داوری تجاری با استانداردهای فراملیتی
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">
+                        <span data-i18n="hero.btn1">درخواست مشاوره</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <a href="#departments" class="btn-outline">
+                        <span data-i18n="hero.btn2">دپارتمان‌های ما</span>
+                        <i class="fas fa-briefcase"></i>
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="number" data-count="1500">0</div>
+                        <div class="label" data-i18n="hero.stat1">پرونده موفق</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="number" data-count="12">0</div>
+                        <div class="label" data-i18n="hero.stat3">دپارتمان تخصصی</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="number" data-count="98">0</div>
+                        <div class="label" data-i18n="hero.stat4">٪ رضایت موکلین</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag" data-i18n="about.tag">درباره موسسه</span>
+                <h2 class="section-title">
+                    <span data-i18n="about.title1">موسسه حقوقی</span>
+                    <span class="gold" data-i18n="about.title2">دادفران فرتاک</span>
+                </h2>
+                <div class="section-divider"></div>
+                <p class="section-desc" data-i18n="about.desc">
+                    پیشگام در ارائه خدمات حقوقی نوین با رویکردی بین‌المللی و تخصصی
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-image reveal-left">
+                    <div class="about-image-inner">
+                        <img src="https://raw.githubusercontent.com/yonesi-lawyer-com/home-page/main/lN8xUMT41npJKPsjZbltYjPTPfg-7gWuPQXETTWz9izef1iDPg.png" alt="دفتر موسسه حقوقی دادفران فرتاک" class="about-img">
+                    </div>
+                </div>
+
+                <div class="about-content reveal-right">
+                    <h3 data-i18n="about.heading">تعهد به عدالت و تخصص در خدمت موکلین</h3>
+                    <p data-i18n="about.p1">
+                        موسسه حقوقی دادفران فرتاک با چندین سال سابقه درخشان در عرصه حقوقی کشور، به عنوان یکی از پیشگامان ارائه خدمات حقوقی تخصصی و فراملیتی شناخته می‌شود. این موسسه با بهره‌گیری از تیمی مجرب از وکلا و مشاوران حقوقی برجسته، آماده ارائه خدمات در تمامی حوزه‌های حقوقی است.
+                    </p>
+                    <p data-i18n="about.p2">
+                        ما بر این باوریم که هر پرونده، داستانی منحصر به فرد دارد و هر موکل، شایسته بهترین خدمات حقوقی است. از این رو، با رویکردی مبتنی بر دانش روز، فناوری‌های نوین و استانداردهای بین‌المللی، در کنار موکلین خود هستیم.
+                    </p>
+
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-i18n="about.f1">تیم حقوقی مجرب</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-i18n="about.f2">استانداردهای بین‌المللی</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-i18n="about.f3">محرمانگی کامل</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-i18n="about.f4">پاسخگویی ۲۴ ساعته</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn-primary">
+                        <span data-i18n="about.btn">بیشتر بدانید</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPARTMENTS -->
+    <section class="departments" id="departments">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag" data-i18n="dept.tag">حوزه‌های تخصصی</span>
+                <h2 class="section-title">
+                    <span data-i18n="dept.title1">دپارتمان‌های</span>
+                    <span class="gold" data-i18n="dept.title2">تخصصی ما</span>
+                </h2>
+                <div class="section-divider"></div>
+                <p class="section-desc" data-i18n="dept.desc">
+                    ارائه خدمات حقوقی جامع در ۱۲ دپارتمان تخصصی با رویکردی نوین و فراملیتی
+                </p>
+            </div>
+
+            <div class="departments-grid">
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-building"></i></div>
+                    <h3 data-i18n="dept.1.title">حقوق شرکت‌ها و تجاری</h3>
+                    <p data-i18n="dept.1.desc">تاسیس، ادغام، انحلال شرکت‌ها، قراردادهای تجاری، مشاوره حقوقی و رسیدگی به دعاوی تجاری شرکت‌های داخلی و بین‌المللی</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 data-i18n="dept.2.title">حقوق بیمه</h3>
+                    <p data-i18n="dept.2.desc">رسیدگی به دعاوی بیمه‌ای، قراردادهای بیمه، خسارت و تعهدات شرکت‌های بیمه و بیمه‌گذاران</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-handshake"></i></div>
+                    <h3 data-i18n="dept.3.title">مشارکت در ساخت</h3>
+                    <p data-i18n="dept.3.desc">تنظیم قراردادهای مشارکت در ساخت، پیش‌خرید آپارتمان و رسیدگی به دعاوی مربوط به پروژه‌های ساختمانی</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fab fa-bitcoin"></i></div>
+                    <h3 data-i18n="dept.4.title">رمزارز و فین‌تک</h3>
+                    <p data-i18n="dept.4.desc">مشاوره حقوقی و رسیدگی به دعاوی در حوزه رمزارزها، صرافی‌های دیجیتال، توکن‌ها و پروژه‌های فین‌تک</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-gavel"></i></div>
+                    <h3 data-i18n="dept.5.title">جرائم اقتصادی</h3>
+                    <p data-i18n="dept.5.desc">رسیدگی به دعاوی جرائم اقتصادی، پولشویی، کلاهبرداری‌های کلان و اخلال در نظام اقتصادی</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-cubes"></i></div>
+                    <h3 data-i18n="dept.6.title">بلاکچین و قراردادهای هوشمند</h3>
+                    <p data-i18n="dept.6.desc">مشاوره در زمینه فناوری بلاکچین، NFTها، قراردادهای هوشمند و DAOها</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-file-signature"></i></div>
+                    <h3 data-i18n="dept.7.title">حقوق ثبتی و اسناد</h3>
+                    <p data-i18n="dept.7.desc">ثبت شرکت‌ها، ثبت علائم تجاری، ثبت املاک و اسناد رسمی و رسیدگی به دعاوی ثبتی</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-city"></i></div>
+                    <h3 data-i18n="dept.8.title">حقوق شهرداری و نوسازی</h3>
+                    <p data-i18n="dept.8.desc">رسیدگی به دعاوی شهرداری، کمیسیون ماده ۱۰۰، پروانه ساخت، تغییر کاربری و نوسازی بافت‌های فرسوده</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-globe"></i></div>
+                    <h3 data-i18n="dept.9.title">حقوق بین‌الملل و فراملیتی</h3>
+                    <p data-i18n="dept.9.desc">قراردادهای بین‌المللی، سرمایه‌گذاری خارجی، تجارت بین‌الملل و رسیدگی به دعاوی فرامرزی</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-balance-scale-right"></i></div>
+                    <h3 data-i18n="dept.10.title">داوری تجاری و میانجی‌گری</h3>
+                    <p data-i18n="dept.10.desc">داوری داخلی و بین‌المللی، میانجی‌گری تجاری، رسیدگی به دعاوی و حل‌وفصل جایگزین اختلافات (ADR)</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3 data-i18n="dept.11.title">مالکیت فکری و کپی‌رایت</h3>
+                    <p data-i18n="dept.11.desc">ثبت اختراع، علائم تجاری، طرح‌های صنعتی، کپی‌رایت و حمایت از نوآوری‌ها</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+
+                <div class="dept-card reveal">
+                    <div class="dept-icon"><i class="fas fa-users"></i></div>
+                    <h3 data-i18n="dept.12.title">حقوق کار و تامین اجتماعی</h3>
+                    <p data-i18n="dept.12.desc">قراردادهای کار، رسیدگی به دعاوی کارگری و کارفرمایی، بیمه تامین اجتماعی و بازنشستگی</p>
+                    <a href="#" class="dept-link" data-i18n="dept.more">اطلاعات بیشتر <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANAGER -->
+    <section class="manager" id="manager">
+        <div class="container">
+            <div class="manager-grid">
+                <div class="manager-photo reveal-left">
+                    <div class="manager-photo-frame"></div>
+                    <div class="manager-photo-inner">
+                        <img src="https://hs3.behtarino.com/media/business_images/693/63179.jpg?x-img=v1%2Fautorotate%2Fv1%2Fresize%2Cw_416%2Ch_215%2Fv1%2Foptimize%2Cq_80%2Clossless_false" alt="محسن یونسی - مدیر موسسه حقوقی دادفران فرتاک" class="manager-img">
+                    </div>
+                </div>
+
+                <div class="manager-info reveal-right">
+                    <span class="section-tag" data-i18n="mgr.tag">مدیریت موسسه</span>
+                    <h2 class="section-title">
+                        <span data-i18n="mgr.title1">وکیل پایه یک</span>
+                        <span class="gold" data-i18n="mgr.title2">دادگستری</span>
+                    </h2>
+                    <div class="section-divider"></div>
+
+                    <h3 class="manager-name" data-i18n="mgr.name">محسن یونسی</h3>
+                    <p class="manager-title" data-i18n="mgr.title3">مدیر موسسه حقوقی دادفران فرتاک | وکیل پایه یک دادگستری و مشاور حقوقی بین‌المللی</p>
+
+                    <p class="manager-bio" data-i18n="mgr.bio1">
+                        جناب آقای محسن یونسی، وکیل پایه یک دادگستری و متخصص در حوزه‌های نوین حقوقی از جمله بلاکچین، رمزارز، حقوق شرکت‌ها و داوری بین‌المللی، با چندین سال سابقه درخشان در عرصه وکالت، مدیریت موسسه حقوقی دادفران فرتاک را بر عهده دارند.
+                    </p>
+                    <p class="manager-bio" data-i18n="mgr.bio2">
+                        ایشان با تکیه بر دانش آکادمیک عمیق، تجربه عملی گسترده و شناخت دقیق از نظام‌های حقوقی داخلی و بین‌المللی، رویکردی نوین و فراملیتی را در ارائه خدمات حقوقی دنبال می‌کنند.
+                    </p>
+
+                    <div class="manager-credentials">
+                        <div class="credential">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span data-i18n="mgr.c1">فوق لیسانس حقوق خصوصی</span>
+                        </div>
+                        <div class="credential">
+                            <i class="fas fa-certificate"></i>
+                            <span data-i18n="mgr.c2">وکیل پایه یک دادگستری</span>
+                        </div>
+                        <div class="credential">
+                            <i class="fas fa-award"></i>
+                            <span data-i18n="mgr.c3">عضو مرکز وکلای قوه قضاییه</span>
+                        </div>
+                        <div class="credential">
+                            <i class="fas fa-medal"></i>
+                            <span data-i18n="mgr.c4">داوری</span>
+                        </div>
+                    </div>
+
+                    <div class="manager-signature">Mohsen Younesi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="why-us" id="why">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag" data-i18n="why.tag">مزایای ما</span>
+                <h2 class="section-title">
+                    <span data-i18n="why.title1">چرا</span>
+                    <span class="gold" data-i18n="why.title2">موسسه دادفران فرتاک؟</span>
+                </h2>
+                <div class="section-divider"></div>
+                <p class="section-desc" data-i18n="why.desc">
+                    ما با تعهد به کیفیت، تخصص و نوآوری، بهترین خدمات حقوقی را ارائه می‌دهیم
+                </p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3 data-i18n="why.1.title">تیم متخصص</h3>
+                    <p data-i18n="why.1.desc">بهره‌گیری از وکلا و مشاوران با تجربه در حوزه‌های تخصصی مختلف حقوقی</p>
+                </div>
+
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-globe-americas"></i></div>
+                    <h3 data-i18n="why.2.title">دیدگاه بین‌المللی</h3>
+                    <p data-i18n="why.2.desc">ارائه خدمات حقوقی با استانداردهای بین‌المللی و همکاری با موسسات فراملیتی</p>
+                </div>
+
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-lock"></i></div>
+                    <h3 data-i18n="why.3.title">محرمانگی مطلق</h3>
+                    <p data-i18n="why.3.desc">حفظ کامل اسرار و اطلاعات موکلین با بالاترین استانداردهای امنیتی</p>
+                </div>
+
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-rocket"></i></div>
+                    <h3 data-i18n="why.4.title">رویکرد نوین</h3>
+                    <p data-i18n="why.4.desc">استفاده از فناوری‌های نوین و روش‌های مدرن در ارائه خدمات حقوقی</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COUNTER -->
+    <section class="counter-section">
+        <div class="container">
+            <div class="counter-grid">
+                <div class="counter-item reveal">
+                    <i class="fas fa-briefcase"></i>
+                    <div class="counter-num" data-count="1500">0</div>
+                    <div class="counter-label" data-i18n="counter.1">پرونده موفق</div>
+                </div>
+                <div class="counter-item reveal">
+                    <i class="fas fa-users"></i>
+                    <div class="counter-num" data-count="2000">0</div>
+                    <div class="counter-label" data-i18n="counter.2">موکل راضی</div>
+                </div>
+                <div class="counter-item reveal">
+                    <i class="fas fa-user-tie"></i>
+                    <div class="counter-num" data-count="45">0</div>
+                    <div class="counter-label" data-i18n="counter.3">وکیل متخصص</div>
+                </div>
+                <div class="counter-item reveal">
+                    <i class="fas fa-trophy"></i>
+                    <div class="counter-num" data-count="30">0</div>
+                    <div class="counter-label" data-i18n="counter.4">جایزه و افتخار</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag" data-i18n="contact.tag">ارتباط با ما</span>
+                <h2 class="section-title">
+                    <span data-i18n="contact.title1">درخواست</span>
+                    <span class="gold" data-i18n="contact.title2">مشاوره حقوقی</span>
+                </h2>
+                <div class="section-divider"></div>
+                <p class="section-desc" data-i18n="contact.desc">
+                    برای دریافت مشاوره تخصصی، با ما در تماس باشید
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info reveal-left">
+                    <h3 data-i18n="contact.infoTitle">اطلاعات تماس</h3>
+                    <p data-i18n="contact.infoDesc">تیم پشتیبانی ما آماده پاسخگویی به سوالات شماست</p>
+
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <div class="label" data-i18n="contact.addr.label">آدرس دفتر مرکزی</div>
+                                <div class="value rtl-text" data-i18n="contact.addr.value">تهران، خیابان مطهری، خیابان کوه نور، بن‌بست دوم، پلاک ۷</div>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <div class="label" data-i18n="contact.phone.label">تلفن تماس</div>
+                                <div class="value" data-i18n="contact.phone.value">۰۹۱۲۹۰۵۶۷۲۴</div>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <div class="label" data-i18n="contact.email.label">ایمیل</div>
+                                <div class="value">info@dadfarānfartak-law.com</div>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <div class="label" data-i18n="contact.hours.label">ساعات کاری</div>
+                                <div class="value rtl-text" data-i18n="contact.hours.value">شنبه تا چهارشنبه: ۹ صبح تا ۷ عصر</div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <form class="contact-form reveal-right" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-i18n="form.name">نام و نام خانوادگی</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="form.phone">شماره تماس</label>
+                            <input type="tel" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-i18n="form.email">ایمیل</label>
+                            <input type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="form.subject">موضوع مشاوره</label>
+                            <select required>
+                                <option value="" data-i18n="form.select">انتخاب کنید...</option>
+                                <option data-i18n="dept.1.title">حقوق شرکت‌ها و تجاری</option>
+                                <option data-i18n="dept.2.title">حقوق بیمه</option>
+                                <option data-i18n="dept.3.title">مشارکت در ساخت</option>
+                                <option data-i18n="dept.4.title">رمزارز و فین‌تک</option>
+                                <option data-i18n="dept.5.title">جرائم اقتصادی</option>
+                                <option data-i18n="dept.6.title">بلاکچین و قراردادهای هوشمند</option>
+                                <option data-i18n="dept.7.title">حقوق ثبتی و اسناد</option>
+                                <option data-i18n="dept.8.title">حقوق شهرداری و نوسازی</option>
+                                <option data-i18n="dept.9.title">حقوق بین‌الملل</option>
+                                <option data-i18n="dept.10.title">داوری تجاری</option>
+                                <option data-i18n="dept.11.title">مالکیت فکری</option>
+                                <option data-i18n="dept.12.title">حقوق کار</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-i18n="form.message">پیام شما</label>
+                        <textarea required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span data-i18n="form.submit">ارسال درخواست</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-about">
+                    <a href="#home" class="logo">
+                        <img src="https://raw.githubusercontent.com/yonesi-lawyer-com/home-page/refs/heads/main/70a562c3-f2e1-4875-b000-259928091981.png" alt="Dadfarān Fartāk Law Firm Logo" class="logo-img">
+                        <div class="logo-text">
+                            <span class="name">DADFARAN FARTAK</span>
+                            <span class="tagline" data-i18n="tagline">موسسه حقوقی دادفران فرتاک</span>
+                        </div>
+                    </a>
+                    <p data-i18n="footer.about">
+                        موسسه حقوقی دادفران فرتاک با مدیریت وکیل پایه یک دادگستری، محسن یونسی، ارائه‌دهنده خدمات حقوقی تخصصی و فراملیتی با چندین سال سابقه درخشان.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 data-i18n="footer.links">لینک‌های سریع</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" data-i18n="nav.home">خانه</a></li>
+                        <li><a href="#about" data-i18n="nav.about">درباره ما</a></li>
+                        <li><a href="#departments" data-i18n="nav.departments">دپارتمان‌ها</a></li>
+                        <li><a href="#manager" data-i18n="nav.manager">مدیریت</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">تماس با ما</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">خدمات ما</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" data-i18n="dept.4.title">رمزارز و فین‌تک</a></li>
+                        <li><a href="#" data-i18n="dept.6.title">بلاکچین</a></li>
+                        <li><a href="#" data-i18n="dept.9.title">حقوق بین‌الملل</a></li>
+                        <li><a href="#" data-i18n="dept.10.title">داوری تجاری</a></li>
+                        <li><a href="#" data-i18n="dept.1.title">حقوق شرکت‌ها</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 data-i18n="footer.newsletter">خبرنامه</h4>
+                    <p style="color: var(--cream-dark); font-size: 0.9rem; margin-bottom: 1rem;" data-i18n="footer.newsDesc">
+                        برای دریافت آخرین اخبار حقوقی، در خبرنامه ما عضو شوید
+                    </p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="ایمیل شما" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    <span data-i18n="footer.copyright">© ۲۰۲۶ تمامی حقوق برای</span>
+                    <span class="gold" data-i18n="footer.brand">موسسه حقوقی دادفران فرتاک</span>
+                    <span data-i18n="footer.reserved">محفوظ است | طراحی و توسعه با ❤️</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        /* ============ PRELOADER ============ */
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1500);
+        });
+
+        /* ============ HEADER SCROLL ============ */
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        /* ============ MOBILE MENU ============ */
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        /* ============ SCROLL REVEAL ANIMATIONS ============ */
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                    }, index * 80);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        /* ============ COUNTER ANIMATION ============ */
+        const counters = document.querySelectorAll('[data-count]');
+        let countersAnimated = new Set();
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated.has(entry.target)) {
+                    countersAnimated.add(entry.target);
+                    animateCounter(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-count'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    el.textContent = Math.floor(current).toLocaleString(currentLang === 'fa' ? 'fa-IR' : 'en-US');
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    el.textContent = target.toLocaleString(currentLang === 'fa' ? 'fa-IR' : 'en-US');
+                }
+            };
+
+            updateCounter();
+        }
+
+        /* ============ BACK TO TOP ============ */
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ============ SMOOTH SCROLL ============ */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || href.length <= 1) return;
+
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        /* ============ FORM SUBMIT ============ */
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.btn-submit');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> ' + (currentLang === 'fa' ? 'ارسال شد!' : 'Sent!');
+            btn.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
+            btn.style.color = 'white';
+
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = '';
+                btn.style.color = '';
+                this.reset();
+            }, 3000);
+        });
+
+        /* ============ MULTI-LANGUAGE SYSTEM ============ */
+        const translations = {
+            fa: {
+                'tagline': 'موسسه حقوقی دادفران فرتاک',
+                'nav.home': 'خانه',
+                'nav.about': 'درباره ما',
+                'nav.departments': 'دپارتمان‌ها',
+                'nav.manager': 'مدیریت',
+                'nav.why': 'چرا ما',
+                'nav.contact': 'تماس',
+                'nav.consult': 'مشاوره حقوقی',
+                'ticker.label': 'اخبار حقوقی',
+                'ticker.1': 'بررسی قانون جدید آیین دادرسی کیفری در مجلس شورای اسلامی',
+                'ticker.2': 'برگزاری سمینار بین‌المللی حقوق بلاکچین در تهران',
+                'ticker.3': 'موسسه دادفران فرتاک آماده ارائه خدمات حقوقی فراملیتی',
+                'ticker.4': 'آغاز ثبت‌نام دوره تخصصی داوری تجاری بین‌المللی',
+                'ticker.5': 'همکاری جدید با موسسات حقوقی اروپا و آسیا',
+                'hero.badge': 'موسسه حقوقی فراملیتی با چندین سال سابقه درخشان',
+                'hero.title1': 'عدالت،',
+                'hero.title2': 'اعتماد،',
+                'hero.title3': 'تعالی',
+                'hero.subtitle': 'موسسه حقوقی دادفران فرتاک با مدیریت وکیل پایه یک دادگستری، محسن یونسی، ارائه‌دهنده خدمات حقوقی تخصصی در حوزه‌های نوین بلاکچین، رمزارز، حقوق بین‌الملل و داوری تجاری با استانداردهای فراملیتی',
+                'hero.btn1': 'درخواست مشاوره',
+                'hero.btn2': 'دپارتمان‌های ما',
+                'hero.stat1': 'پرونده موفق',
+                'hero.stat3': 'دپارتمان تخصصی',
+                'hero.stat4': '٪ رضایت موکلین',
+                'about.tag': 'درباره موسسه',
+                'about.title1': 'موسسه حقوقی',
+                'about.title2': 'دادفران فرتاک',
+                'about.desc': 'پیشگام در ارائه خدمات حقوقی نوین با رویکردی بین‌المللی و تخصصی',
+                'about.heading': 'تعهد به عدالت و تخصص در خدمت موکلین',
+                'about.p1': 'موسسه حقوقی دادفران فرتاک با چندین سال سابقه درخشان در عرصه حقوقی کشور، به عنوان یکی از پیشگامان ارائه خدمات حقوقی تخصصی و فراملیتی شناخته می‌شود.',
+                'about.p2': 'ما بر این باوریم که هر پرونده، داستانی منحصر به فرد دارد و هر موکل، شایسته بهترین خدمات حقوقی است.',
+                'about.f1': 'تیم حقوقی مجرب',
+                'about.f2': 'استانداردهای بین‌المللی',
+                'about.f3': 'محرمانگی کامل',
+                'about.f4': 'پاسخگویی ۲۴ ساعته',
+                'about.btn': 'بیشتر بدانید',
+                'dept.tag': 'حوزه‌های تخصصی',
+                'dept.title1': 'دپارتمان‌های',
+                'dept.title2': 'تخصصی ما',
+                'dept.desc': 'ارائه خدمات حقوقی جامع در ۱۲ دپارتمان تخصصی با رویکردی نوین و فراملیتی',
+                'dept.1.title': 'حقوق شرکت‌ها و تجاری',
+                'dept.1.desc': 'تاسیس، ادغام، انحلال شرکت‌ها، قراردادهای تجاری، مشاوره حقوقی و رسیدگی به دعاوی تجاری شرکت‌های داخلی و بین‌المللی',
+                'dept.2.title': 'حقوق بیمه',
+                'dept.2.desc': 'رسیدگی به دعاوی بیمه‌ای، قراردادهای بیمه، خسارت و تعهدات شرکت‌های بیمه و بیمه‌گذاران',
+                'dept.3.title': 'مشارکت در ساخت',
+                'dept.3.desc': 'تنظیم قراردادهای مشارکت در ساخت، پیش‌خرید آپارتمان و رسیدگی به دعاوی مربوط به پروژه‌های ساختمانی',
+                'dept.4.title': 'رمزارز و فین‌تک',
+                'dept.4.desc': 'مشاوره حقوقی و رسیدگی به دعاوی در حوزه رمزارزها، صرافی‌های دیجیتال، توکن‌ها و پروژه‌های فین‌تک',
+                'dept.5.title': 'جرائم اقتصادی',
+                'dept.5.desc': 'رسیدگی به دعاوی جرائم اقتصادی، پولشویی، کلاهبرداری‌های کلان و اخلال در نظام اقتصادی',
+                'dept.6.title': 'بلاکچین و قراردادهای هوشمند',
+                'dept.6.desc': 'مشاوره در زمینه فناوری بلاکچین، NFTها، قراردادهای هوشمند و DAOها',
+                'dept.7.title': 'حقوق ثبتی و اسناد',
+                'dept.7.desc': 'ثبت شرکت‌ها، ثبت علائم تجاری، ثبت املاک و اسناد رسمی و رسیدگی به دعاوی ثبتی',
+                'dept.8.title': 'حقوق شهرداری و نوسازی',
+                'dept.8.desc': 'رسیدگی به دعاوی شهرداری، کمیسیون ماده ۱۰۰، پروانه ساخت، تغییر کاربری و نوسازی بافت‌های فرسوده',
+                'dept.9.title': 'حقوق بین‌الملل و فراملیتی',
+                'dept.9.desc': 'قراردادهای بین‌المللی، سرمایه‌گذاری خارجی، تجارت بین‌الملل و رسیدگی به دعاوی فرامرزی',
+                'dept.10.title': 'داوری تجاری و میانجی‌گری',
+                'dept.10.desc': 'داوری داخلی و بین‌المللی، میانجی‌گری تجاری، رسیدگی به دعاوی و حل‌وفصل جایگزین اختلافات (ADR)',
+                'dept.11.title': 'مالکیت فکری و کپی‌رایت',
+                'dept.11.desc': 'ثبت اختراع، علائم تجاری، طرح‌های صنعتی، کپی‌رایت و حمایت از نوآوری‌ها',
+                'dept.12.title': 'حقوق کار و تامین اجتماعی',
+                'dept.12.desc': 'قراردادهای کار، رسیدگی به دعاوی کارگری و کارفرمایی، بیمه تامین اجتماعی و بازنشستگی',
+                'dept.more': 'اطلاعات بیشتر',
+                'mgr.tag': 'مدیریت موسسه',
+                'mgr.title1': 'وکیل پایه یک',
+                'mgr.title2': 'دادگستری',
+                'mgr.name': 'محسن یونسی',
+                'mgr.title3': 'مدیر موسسه حقوقی دادفران فرتاک | وکیل پایه یک دادگستری و مشاور حقوقی بین‌المللی',
+                'mgr.bio1': 'جناب آقای محسن یونسی، وکیل پایه یک دادگستری و متخصص در حوزه‌های نوین حقوقی از جمله بلاکچین، رمزارز، حقوق شرکت‌ها و داوری بین‌المللی، با چندین سال سابقه درخشان در عرصه وکالت، مدیریت موسسه حقوقی دادفران فرتاک را بر عهده دارند.',
+                'mgr.bio2': 'ایشان با تکیه بر دانش آکادمیک عمیق، تجربه عملی گسترده و شناخت دقیق از نظام‌های حقوقی داخلی و بین‌المللی، رویکردی نوین و فراملیتی را در ارائه خدمات حقوقی دنبال می‌کنند.',
+                'mgr.c1': 'فوق لیسانس حقوق خصوصی',
+                'mgr.c2': 'وکیل پایه یک دادگستری',
+                'mgr.c3': 'عضو مرکز وکلای قوه قضاییه',
+                'mgr.c4': 'داوری',
+                'why.tag': 'مزایای ما',
+                'why.title1': 'چرا',
+                'why.title2': 'موسسه دادفران فرتاک؟',
+                'why.desc': 'ما با تعهد به کیفیت، تخصص و نوآوری، بهترین خدمات حقوقی را ارائه می‌دهیم',
+                'why.1.title': 'تیم متخصص',
+                'why.1.desc': 'بهره‌گیری از وکلا و مشاوران با تجربه در حوزه‌های تخصصی مختلف حقوقی',
+                'why.2.title': 'دیدگاه بین‌المللی',
+                'why.2.desc': 'ارائه خدمات حقوقی با استانداردهای بین‌المللی و همکاری با موسسات فراملیتی',
+                'why.3.title': 'محرمانگی مطلق',
+                'why.3.desc': 'حفظ کامل اسرار و اطلاعات موکلین با بالاترین استانداردهای امنیتی',
+                'why.4.title': 'رویکرد نوین',
+                'why.4.desc': 'استفاده از فناوری‌های نوین و روش‌های مدرن در ارائه خدمات حقوقی',
+                'counter.1': 'پرونده موفق',
+                'counter.2': 'موکل راضی',
+                'counter.3': 'وکیل متخصص',
+                'counter.4': 'جایزه و افتخار',
+                'contact.tag': 'ارتباط با ما',
+                'contact.title1': 'درخواست',
+                'contact.title2': 'مشاوره حقوقی',
+                'contact.desc': 'برای دریافت مشاوره تخصصی، با ما در تماس باشید',
+                'contact.infoTitle': 'اطلاعات تماس',
+                'contact.infoDesc': 'تیم پشتیبانی ما آماده پاسخگویی به سوالات شماست',
+                'contact.addr.label': 'آدرس دفتر مرکزی',
+                'contact.addr.value': 'تهران، خیابان مطهری، خیابان کوه نور، بن‌بست دوم، پلاک ۷',
+                'contact.phone.label': 'تلفن تماس',
+                'contact.phone.value': '۰۹۱۲۹۰۵۶۷۲۴',
+                'contact.email.label': 'ایمیل',
+                'contact.hours.label': 'ساعات کاری',
+                'contact.hours.value': 'شنبه تا چهارشنبه: ۹ صبح تا ۷ عصر',
+                'form.name': 'نام و نام خانوادگی',
+                'form.phone': 'شماره تماس',
+                'form.email': 'ایمیل',
+                'form.subject': 'موضوع مشاوره',
+                'form.select': 'انتخاب کنید...',
+                'form.message': 'پیام شما',
+                'form.submit': 'ارسال درخواست',
+                'footer.about': 'موسسه حقوقی دادفران فرتاک با مدیریت وکیل پایه یک دادگستری، محسن یونسی، ارائه‌دهنده خدمات حقوقی تخصصی و فراملیتی با چندین سال سابقه درخشان.',
+                'footer.links': 'لینک‌های سریع',
+                'footer.services': 'خدمات ما',
+                'footer.newsletter': 'خبرنامه',
+                'footer.newsDesc': 'برای دریافت آخرین اخبار حقوقی، در خبرنامه ما عضو شوید',
+                'footer.copyright': '© ۲۰۲۶ تمامی حقوق برای',
+                'footer.brand': 'موسسه حقوقی دادفران فرتاک',
+                'footer.reserved': 'محفوظ است | طراحی و توسعه با ❤️'
+            },
+            en: {
+                'tagline': 'Dadfarān Fartāk Law Firm',
+                'nav.home': 'Home',
+                'nav.about': 'About',
+                'nav.departments': 'Departments',
+                'nav.manager': 'Management',
+                'nav.why': 'Why Us',
+                'nav.contact': 'Contact',
+                'nav.consult': 'Legal Consultation',
+                'ticker.label': 'Legal News',
+                'ticker.1': 'Review of New Criminal Procedure Law in Parliament',
+                'ticker.2': 'International Blockchain Law Seminar Held in Tehran',
+                'ticker.3': 'Dadfarān Fartāk Institute Ready to Provide Transnational Legal Services',
+                'ticker.4': 'Registration Open for International Commercial Arbitration Course',
+                'ticker.5': 'New Partnership with European and Asian Law Firms',
+                'hero.badge': 'Transnational Law Firm with Several Years of Excellence',
+                'hero.title1': 'Justice,',
+                'hero.title2': 'Trust,',
+                'hero.title3': 'Excellence',
+                'hero.subtitle': 'Dadfarān Fartāk Law Firm, under the management of Attorney at Law Mohsen Younesi, provides specialized legal services in emerging fields of blockchain, cryptocurrency, international law, and commercial arbitration with transnational standards',
+                'hero.btn1': 'Request Consultation',
+                'hero.btn2': 'Our Departments',
+                'hero.stat1': 'Successful Cases',
+                'hero.stat3': 'Specialized Departments',
+                'hero.stat4': '% Client Satisfaction',
+                'about.tag': 'About the Firm',
+                'about.title1': 'Dadfarān Fartāk',
+                'about.title2': 'Law Firm',
+                'about.desc': 'Pioneer in providing modern legal services with an international and specialized approach',
+                'about.heading': 'Commitment to Justice and Expertise in Service of Clients',
+                'about.p1': 'Dadfarān Fartāk Law Firm, with several years of brilliant experience in the country\'s legal field, is recognized as one of the pioneers in providing specialized and transnational legal services.',
+                'about.p2': 'We believe that every case has a unique story and every client deserves the best legal services.',
+                'about.f1': 'Experienced Legal Team',
+                'about.f2': 'International Standards',
+                'about.f3': 'Complete Confidentiality',
+                'about.f4': '24/7 Response',
+                'about.btn': 'Learn More',
+                'dept.tag': 'Areas of Expertise',
+                'dept.title1': 'Our Specialized',
+                'dept.title2': 'Departments',
+                'dept.desc': 'Comprehensive legal services across 12 specialized departments with a modern and transnational approach',
+                'dept.1.title': 'Corporate & Commercial Law',
+                'dept.1.desc': 'Establishment, merger, dissolution of companies, commercial contracts, legal consulting and handling commercial disputes of domestic and international companies',
+                'dept.2.title': 'Insurance Law',
+                'dept.2.desc': 'Handling insurance disputes, insurance contracts, damages and obligations of insurance companies and policyholders',
+                'dept.3.title': 'Construction Partnership',
+                'dept.3.desc': 'Drafting construction partnership contracts, apartment pre-purchase and handling disputes related to construction projects',
+                'dept.4.title': 'Cryptocurrency & FinTech',
+                'dept.4.desc': 'Legal consulting and handling disputes in cryptocurrencies, digital exchanges, tokens and FinTech projects',
+                'dept.5.title': 'Economic Crimes',
+                'dept.5.desc': 'Handling economic crime cases, money laundering, major fraud and disruption of the economic system',
+                'dept.6.title': 'Blockchain & Smart Contracts',
+                'dept.6.desc': 'Consulting on blockchain technology, NFTs, smart contracts and DAOs',
+                'dept.7.title': 'Registration & Deeds Law',
+                'dept.7.desc': 'Company registration, trademark registration, real estate and official deeds registration and handling registration disputes',
+                'dept.8.title': 'Municipality & Urban Renewal',
+                'dept.8.desc': 'Handling municipality disputes, Article 100 Commission, building permits, land use change and renovation of worn-out textures',
+                'dept.9.title': 'International & Transnational Law',
+                'dept.9.desc': 'International contracts, foreign investment, international trade and handling cross-border disputes',
+                'dept.10.title': 'Commercial Arbitration & Mediation',
+                'dept.10.desc': 'Domestic and international arbitration, commercial mediation, handling disputes and alternative dispute resolution (ADR)',
+                'dept.11.title': 'Intellectual Property & Copyright',
+                'dept.11.desc': 'Patent registration, trademarks, industrial designs, copyright and protection of innovations',
+                'dept.12.title': 'Labor & Social Security Law',
+                'dept.12.desc': 'Employment contracts, handling labor and employer disputes, social security insurance and retirement',
+                'dept.more': 'More Info',
+                'mgr.tag': 'Firm Management',
+                'mgr.title1': 'Attorney at Law',
+                'mgr.title2': 'of Iran',
+                'mgr.name': 'Mohsen Younesi',
+                'mgr.title3': 'Director of Dadfarān Fartāk Law Firm | Attorney at Law and International Legal Advisor',
+                'mgr.bio1': 'Mr. Mohsen Younesi, Attorney at Law and specialist in modern legal fields including blockchain, cryptocurrency, corporate law and international arbitration, with several years of brilliant experience in the field of advocacy, manages Dadfarān Fartāk Law Firm.',
+                'mgr.bio2': 'Relying on deep academic knowledge, extensive practical experience and precise understanding of domestic and international legal systems, he follows a modern and transnational approach in providing legal services.',
+                'mgr.c1': 'Master\'s in Private Law',
+                'mgr.c2': 'Attorney at Law of Iran',
+                'mgr.c3': 'Member of the Judiciary Bar Association',
+                'mgr.c4': 'Arbitrator',
+                'why.tag': 'Our Advantages',
+                'why.title1': 'Why',
+                'why.title2': 'Dadfarān Fartāk Firm?',
+                'why.desc': 'We provide the best legal services with commitment to quality, expertise and innovation',
+                'why.1.title': 'Expert Team',
+                'why.1.desc': 'Utilizing experienced lawyers and consultants in various specialized legal fields',
+                'why.2.title': 'International Perspective',
+                'why.2.desc': 'Providing legal services with international standards and cooperation with transnational institutions',
+                'why.3.title': 'Absolute Confidentiality',
+                'why.3.desc': 'Complete preservation of client secrets and information with the highest security standards',
+                'why.4.title': 'Modern Approach',
+                'why.4.desc': 'Using new technologies and modern methods in providing legal services',
+                'counter.1': 'Successful Cases',
+                'counter.2': 'Satisfied Clients',
+                'counter.3': 'Specialized Lawyers',
+                'counter.4': 'Awards & Honors',
+                'contact.tag': 'Contact Us',
+                'contact.title1': 'Request Legal',
+                'contact.title2': 'Consultation',
+                'contact.desc': 'Contact us to receive specialized consultation',
+                'contact.infoTitle': 'Contact Information',
+                'contact.infoDesc': 'Our support team is ready to answer your questions',
+                'contact.addr.label': 'Head Office Address',
+                'contact.addr.value': 'Tehran, Motahhari St., Kooh-e Noor St., 2nd Dead-end, No. 7',
+                'contact.phone.label': 'Phone Number',
+                'contact.phone.value': '+98 912 905 6724',
+                'contact.email.label': 'Email',
+                'contact.hours.label': 'Working Hours',
+                'contact.hours.value': 'Saturday to Wednesday: 9 AM to 7 PM',
+                'form.name': 'Full Name',
+                'form.phone': 'Phone Number',
+                'form.email': 'Email',
+                'form.subject': 'Consultation Subject',
+                'form.select': 'Select...',
+                'form.message': 'Your Message',
+                'form.submit': 'Send Request',
+                'footer.about': 'Dadfarān Fartāk Law Firm, under the management of Attorney at Law Mohsen Younesi, provides specialized and transnational legal services with several years of brilliant experience.',
+                'footer.links': 'Quick Links',
+                'footer.services': 'Our Services',
+                'footer.newsletter': 'Newsletter',
+                'footer.newsDesc': 'Subscribe to our newsletter to receive the latest legal news',
+                'footer.copyright': '© 2026 All Rights Reserved for',
+                'footer.brand': 'Dadfarān Fartāk Law Firm',
+                'footer.reserved': '| Designed & Developed with ❤️'
+            }
+        };
+
+        let currentLang = 'fa';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+            if (lang === 'en') {
+                document.body.classList.add('en');
+            } else {
+                document.body.classList.remove('en');
+            }
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            document.getElementById('langText').textContent = lang === 'fa' ? 'EN' : 'فا';
+
+            // Update counter display based on language
+            document.querySelectorAll('[data-count]').forEach(el => {
+                const target = parseInt(el.getAttribute('data-count'));
+                if (lang === 'fa') {
+                    el.textContent = target.toLocaleString('fa-IR');
+                } else {
+                    el.textContent = target.toLocaleString('en-US');
+                }
+            });
+        }
+
+        document.getElementById('langSwitch').addEventListener('click', () => {
+            setLanguage(currentLang === 'fa' ? 'en' : 'fa');
+        });
+
+        /* ============ PARALLAX EFFECT ON HERO ============ */
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight && window.innerWidth > 768) {
+                hero.style.backgroundPositionY = scrolled * 0.3 + 'px';
+            }
+        });
+
+        /* ============ DEPARTMENT CARD TILT EFFECT ============ */
+        document.querySelectorAll('.dept-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `translateY(-10px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        /* ============ INITIALIZE ============ */
+        setLanguage('fa');
+    </script>
 
 </body>
 </html>
